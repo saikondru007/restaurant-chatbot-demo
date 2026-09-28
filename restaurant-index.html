@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Casa Verde Mexican Kitchen — Denton, TX</title>
+<style>
+  :root{
+    --verde:#178a4c; --verde-dark:#0f6e3a; --verde-light:#d3f3e2;
+    --ink:#22301f; --muted:#5f7358; --bg:#faf8f2; --card:#ffffff;
+    --accent:#e2703a;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; color:var(--ink); background:var(--bg); line-height:1.6;}
+  /* ---------- NAV ---------- */
+  nav{position:sticky; top:0; z-index:50; background:rgba(255,255,255,.92); backdrop-filter:blur(8px); border-bottom:1px solid #e9e4d6;}
+  .nav-inner{max-width:1100px; margin:0 auto; padding:14px 24px; display:flex; align-items:center; justify-content:space-between;}
+  .logo{display:flex; align-items:center; gap:10px; font-weight:800; font-size:1.15rem; color:var(--ink);}
+  .logo .mark{width:36px; height:36px; border-radius:12px; background:linear-gradient(135deg,var(--verde),#22b45e); display:flex; align-items:center; justify-content:center; font-size:20px;}
+  .nav-links{display:flex; gap:26px; align-items:center;}
+  .nav-links a{text-decoration:none; color:var(--muted); font-weight:600; font-size:.95rem;}
+  .nav-links a:hover{color:var(--verde-dark);}
+  .btn{display:inline-block; background:var(--verde); color:#fff; border:none; padding:12px 24px; border-radius:999px; font-weight:700; font-size:.95rem; cursor:pointer; text-decoration:none; transition:transform .15s, background .15s;}
+  .btn:hover{background:var(--verde-dark); transform:translateY(-1px);}
+  .btn-ghost{background:#fff; color:var(--verde-dark); border:2px solid var(--verde-light);}
+  .btn-ghost:hover{background:var(--verde-light);}
+  /* ---------- HERO ---------- */
+  .hero{max-width:1100px; margin:0 auto; padding:72px 24px 56px; display:grid; grid-template-columns:1.1fr .9fr; gap:48px; align-items:center;}
+  .hero h1{font-size:3rem; line-height:1.15; letter-spacing:-1px; margin-bottom:16px;}
+  .hero h1 span{color:var(--verde);}
+  .hero p{color:var(--muted); font-size:1.1rem; margin-bottom:28px; max-width:480px;}
+  .hero-cta{display:flex; gap:14px; flex-wrap:wrap;}
+  .hero-badges{display:flex; gap:22px; margin-top:34px; flex-wrap:wrap;}
+  .badge{display:flex; align-items:center; gap:8px; font-size:.9rem; font-weight:600; color:var(--muted);}
+  .badge .star{color:var(--accent); font-size:1.1rem;}
+  .hero-art{background:linear-gradient(135deg,#f7b267,#e2703a 55%,#c2571f); border-radius:28px; min-height:340px; display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden;}
+  .hero-art::after{content:""; position:absolute; width:420px; height:420px; border-radius:50%; background:rgba(255,255,255,.22); top:-120px; right:-120px;}
+  .hero-art .big{font-size:120px; position:relative; z-index:1; filter:drop-shadow(0 12px 24px rgba(0,0,0,.15));}
+  .hero-art .tag{position:absolute; bottom:22px; left:22px; right:22px; z-index:1; background:#fff; border-radius:16px; padding:14px 18px; font-size:.9rem; box-shadow:0 8px 24px rgba(0,0,0,.12);}
+  .hero-art .tag b{color:var(--verde-dark);}
+  /* ---------- SECTIONS ---------- */
+  .section{max-width:1100px; margin:0 auto; padding:48px 24px;}
+  .section h2{font-size:1.9rem; letter-spacing:-.5px; margin-bottom:8px;}
+  .section .sub{color:var(--muted); margin-bottom:32px;}
+  .menu-cat{font-size:1.25rem; margin:30px 0 16px; display:flex; align-items:center; gap:10px;}
+  .menu-cat:first-of-type{margin-top:0;}
+  .grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:20px;}
+  .card{background:var(--card); border-radius:18px; padding:26px; border:1px solid #e9e4d6; transition:transform .15s, box-shadow .15s;}
+  .card:hover{transform:translateY(-3px); box-shadow:0 12px 28px rgba(23,138,76,.12);}
+  .card .icon{font-size:32px; margin-bottom:12px;}
+  .card h3{font-size:1.1rem; margin-bottom:6px;}
+  .card p{color:var(--muted); font-size:.93rem;}
+  .card .price{margin-top:12px; font-weight:800; color:var(--verde-dark);}
+  .card .tags{margin-top:8px; font-size:.82rem; color:var(--muted);}
+  .about-wrap{display:grid; grid-template-columns:1.2fr .8fr; gap:20px;}
+  .about-points{display:flex; flex-direction:column; gap:14px;}
+  .about-point{display:flex; gap:12px; align-items:flex-start; background:var(--card); border:1px solid #e9e4d6; border-radius:14px; padding:16px 18px;}
+  .about-point .e{font-size:24px;}
+  .about-point b{display:block; margin-bottom:2px;}
+  .about-point p{color:var(--muted); font-size:.9rem;}
+  .info{display:grid; grid-template-columns:1fr 1fr 1fr; gap:20px;}
+  .info .card h3{margin-bottom:12px;}
+  .hours-row{display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px dashed #e9e4d6; font-size:.95rem;}
+  .hours-row:last-child{border:none;}
+  footer{background:#12301f; color:#bfe3cb; margin-top:40px;}
+  .footer-inner{max-width:1100px; margin:0 auto; padding:36px 24px; display:flex; justify-content:space-between; gap:24px; flex-wrap:wrap; font-size:.9rem;}
+  footer b{color:#fff;}
+  .demo-note{max-width:1100px; margin:0 auto; padding:0 24px 28px; color:#8aa390; font-size:.8rem;}
+  @media(max-width:760px){ .hero{grid-template-columns:1fr; padding-top:48px;} .hero h1{font-size:2.2rem;} .info{grid-template-columns:1fr;} .about-wrap{grid-template-columns:1fr;} .nav-links a:not(.btn){display:none;} }
+
+  /* ---------- CHAT WIDGET ---------- */
+  #chat-launcher{position:fixed; right:24px; bottom:24px; width:64px; height:64px; border-radius:50%; background:linear-gradient(135deg,var(--verde),var(--verde-dark)); border:none; cursor:pointer; font-size:28px; box-shadow:0 10px 30px rgba(23,138,76,.45); z-index:100; transition:transform .15s; display:flex; align-items:center; justify-content:center;}
+  #chat-launcher:hover{transform:scale(1.07);}
+  #chat-badge{position:absolute; top:-4px; right:-4px; background:#ef4444; color:#fff; font-size:.7rem; font-weight:800; width:22px; height:22px; border-radius:50%; display:flex; align-items:center; justify-content:center;}
+  #chat-widget{position:fixed; right:24px; bottom:100px; width:384px; max-width:calc(100vw - 32px); height:580px; max-height:calc(100vh - 130px); background:#fff; border-radius:22px; box-shadow:0 24px 70px rgba(18,48,31,.28); z-index:100; display:none; flex-direction:column; overflow:hidden; border:1px solid #e9e4d6;}
+  #chat-widget.open{display:flex; animation:pop .22s ease-out;}
+  @keyframes pop{from{transform:translateY(16px) scale(.97); opacity:0;} to{transform:none; opacity:1;}}
+  .chat-header{background:linear-gradient(135deg,var(--verde),var(--verde-dark)); color:#fff; padding:16px 18px; display:flex; align-items:center; gap:12px;}
+  .chat-avatar{width:42px; height:42px; border-radius:50%; background:#fff; display:flex; align-items:center; justify-content:center; font-size:22px; flex-shrink:0;}
+  .chat-header .t{flex:1;}
+  .chat-header .t b{display:block; font-size:.98rem;}
+  .chat-header .t span{font-size:.78rem; opacity:.92; display:flex; align-items:center; gap:6px;}
+  .dot{width:8px; height:8px; border-radius:50%; background:#4ade80; display:inline-block;}
+  .chat-close{background:rgba(255,255,255,.18); border:none; color:#fff; width:30px; height:30px; border-radius:50%; cursor:pointer; font-size:15px;}
+  .chat-close:hover{background:rgba(255,255,255,.32);}
+  #chat-body{flex:1; overflow-y:auto; padding:18px 14px; background:#fbfaf6; display:flex; flex-direction:column; gap:10px;}
+  .msg{max-width:82%; padding:11px 15px; border-radius:18px; font-size:.92rem; line-height:1.5; animation:fadein .2s ease-out;}
+  @keyframes fadein{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:none;}}
+  .msg.bot{background:#fff; border:1px solid #ece7d8; border-bottom-left-radius:6px; align-self:flex-start; color:var(--ink); box-shadow:0 2px 6px rgba(0,0,0,.04);}
+  .msg.user{background:var(--verde); color:#fff; border-bottom-right-radius:6px; align-self:flex-end;}
+  .msg.typing{display:flex; gap:5px; padding:15px 18px;}
+  .msg.typing i{width:8px; height:8px; border-radius:50%; background:#9db89f; animation:blink 1.1s infinite;}
+  .msg.typing i:nth-child(2){animation-delay:.18s;} .msg.typing i:nth-child(3){animation-delay:.36s;}
+  @keyframes blink{0%,60%,100%{opacity:.25; transform:none;} 30%{opacity:1; transform:translateY(-3px);}}
+  #chips{display:flex; gap:8px; padding:10px 14px 4px; flex-wrap:wrap; background:#fbfaf6;}
+  .chip{border:1.5px solid var(--verde); color:var(--verde-dark); background:#fff; border-radius:999px; padding:7px 14px; font-size:.83rem; font-weight:600; cursor:pointer; transition:background .15s;}
+  .chip:hover{background:var(--verde-light);}
+  .chat-input{display:flex; gap:8px; padding:12px 14px 16px; background:#fbfaf6; border-top:1px solid #ece7d8;}
+  .chat-input input{flex:1; border:1.5px solid #ddd6c2; border-radius:999px; padding:11px 16px; font-size:.92rem; outline:none; font-family:inherit;}
+  .chat-input input:focus{border-color:var(--verde);}
+  .chat-input button{background:var(--verde); color:#fff; border:none; width:44px; height:44px; border-radius:50%; cursor:pointer; font-size:18px; flex-shrink:0;}
+  .chat-input button:hover{background:var(--verde-dark);}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="logo"><span class="mark">🌮</span> Casa Verde</div>
+    <div class="nav-links">
+      <a href="#menu">Menu</a>
+      <a href="#about">About</a>
+      <a href="#visit">Hours &amp; Location</a>
+      <a href="#visit">(940) 555-0182</a>
+      <a class="btn" href="#" onclick="openChat();return false;">Book a Table</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div>
+    <h1>Real Mexican flavor, made <span>fresh daily.</span></h1>
+    <p>Family-owned Mexican kitchen in the heart of Denton. Handmade tortillas, slow-roasted meats, and salsas ground fresh every morning — plus catering for your next fiesta.</p>
+    <div class="hero-cta">
+      <button class="btn" onclick="openChat()">💬 Chat with Verde</button>
+      <a class="btn btn-ghost" href="#menu">View menu</a>
+    </div>
+    <div class="hero-badges">
+      <span class="badge"><span class="star">★★★★★</span> 4.8 · 620+ reviews</span>
+      <span class="badge">🌮 Taco Tuesday — $2 tacos</span>
+      <span class="badge">✅ Free parking on site</span>
+    </div>
+  </div>
+  <div class="hero-art">
+    <span class="big">🌮</span>
+    <div class="tag"><b>Meet Verde, our AI host</b> — click the chat bubble to see the menu, book a table, or plan catering.</div>
+  </div>
+</header>
+
+<section class="section" id="menu">
+  <h2>Our menu</h2>
+  <p class="sub">Everything made in-house, every day. Ask Verde about veggie &amp; vegan options.</p>
+
+  <h3 class="menu-cat">🌮 Tacos <span style="font-weight:400;font-size:.9rem;color:var(--muted)">— 3 per order on handmade corn tortillas</span></h3>
+  <div class="grid">
+    <div class="card"><div class="icon">🌮</div><h3>Al Pastor</h3><p>Marinated pork, grilled pineapple, cilantro &amp; onion.</p><div class="price">$11.99</div><div class="tags">🌶️ medium heat</div></div>
+    <div class="card"><div class="icon">🐟</div><h3>Baja Fish</h3><p>Crispy cod, chipotle crema, crunchy cabbage slaw.</p><div class="price">$12.99</div><div class="tags">🌶️ mild</div></div>
+    <div class="card"><div class="icon">🍖</div><h3>Carnitas</h3><p>Slow-roasted pork, pickled onion, salsa verde.</p><div class="price">$11.49</div><div class="tags">🌶️ mild</div></div>
+    <div class="card"><div class="icon">🍲</div><h3>Birria</h3><p>Three tacos with a rich consommé for dipping.</p><div class="price">$13.99</div><div class="tags">🌶️ medium heat · 🔥 guest favorite</div></div>
+    <div class="card"><div class="icon">🫑</div><h3>Veggie</h3><p>Grilled peppers, mushrooms &amp; onion, avocado crema.</p><div class="price">$10.99</div><div class="tags">🌱 vegetarian · 🌶️ mild</div></div>
+  </div>
+
+  <h3 class="menu-cat">🫔 Enchiladas <span style="font-weight:400;font-size:.9rem;color:var(--muted)">— served with rice &amp; beans</span></h3>
+  <div class="grid">
+    <div class="card"><div class="icon">🧀</div><h3>Cheese Enchiladas</h3><p>Three cheese enchiladas smothered in red chile sauce.</p><div class="price">$12.49</div><div class="tags">🌱 vegetarian</div></div>
+    <div class="card"><div class="icon">🍗</div><h3>Chicken Enchiladas</h3><p>Pulled chicken, tomatillo salsa, crema drizzle.</p><div class="price">$13.99</div><div class="tags">🌶️ mild</div></div>
+    <div class="card"><div class="icon">🥩</div><h3>Beef Enchiladas</h3><p>Seasoned ground beef, red chile sauce, diced onion.</p><div class="price">$14.49</div><div class="tags">🌶️ medium heat</div></div>
+    <div class="card"><div class="icon">💚</div><h3>Enchiladas Verdes</h3><p>Chicken, roasted tomatillo sauce, queso fresco.</p><div class="price">$14.49</div><div class="tags">🌶️ medium heat</div></div>
+  </div>
+
+  <h3 class="menu-cat">🔥 Fajitas <span style="font-weight:400;font-size:.9rem;color:var(--muted)">— served sizzling with rice, beans &amp; flour tortillas</span></h3>
+  <div class="grid">
+    <div class="card"><div class="icon">🍗</div><h3>Chicken Fajitas</h3><p>Sizzling chicken, peppers &amp; onions.</p><div class="price">$17.99</div><div class="tags">Serves one generously</div></div>
+    <div class="card"><div class="icon">🥩</div><h3>Steak Fajitas</h3><p>Sizzling skirt steak, peppers &amp; onions.</p><div class="price">$19.99</div><div class="tags">🔥 guest favorite</div></div>
+    <div class="card"><div class="icon">🍤</div><h3>Mixed Grill Fajitas</h3><p>Chicken + steak + shrimp — the full sizzle.</p><div class="price">$21.99</div><div class="tags">Great for sharing</div></div>
+    <div class="card"><div class="icon">🍄</div><h3>Veggie Fajitas</h3><p>Grilled seasonal veggies &amp; mushrooms.</p><div class="price">$15.99</div><div class="tags">🌱 vegetarian · vegan on request</div></div>
+  </div>
+
+  <h3 class="menu-cat">🍰 Sides &amp; Sips</h3>
+  <div class="grid">
+    <div class="card"><div class="icon">🥑</div><h3>Tableside Guacamole</h3><p>Made fresh to order with warm totopos.</p><div class="price">$7.99</div><div class="tags">🌱 vegan</div></div>
+    <div class="card"><div class="icon">🥖</div><h3>Churros</h3><p>Cinnamon sugar with cajeta dipping sauce.</p><div class="price">$5.99</div><div class="tags">🌱 vegetarian</div></div>
+    <div class="card"><div class="icon">🥛</div><h3>Horchata</h3><p>House-made cinnamon rice drink.</p><div class="price">$3.99</div><div class="tags">🌱 vegan</div></div>
+  </div>
+</section>
+
+<section class="section" id="about">
+  <h2>Our story</h2>
+  <p class="sub">A Denton family kitchen since 2016.</p>
+  <div class="about-wrap">
+    <div class="card">
+      <p>Casa Verde started with our grandmother's recipe box from Guadalajara and a tiny food truck off the square. Ten years later we're still grinding our salsas fresh every morning, pressing every tortilla by hand, and treating every guest like family.<br><br>Whether it's Taco Tuesday with friends, a birthday fiesta, or catering for 200 — pull up a chair. You're family here. 🇲🇽</p>
+    </div>
+    <div class="about-points">
+      <div class="about-point"><span class="e">🌽</span><div><b>Tortillas made in-house</b><p>Pressed fresh all day, every day. You'll taste the difference.</p></div></div>
+      <div class="about-point"><span class="e">🔥</span><div><b>Wood-fired grill</b><p>Our meats get real smoke and real flavor — no shortcuts.</p></div></div>
+      <div class="about-point"><span class="e">🎉</span><div><b>Catering &amp; events</b><p>Taco bars, fajita spreads, and full-service catering across Denton County.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="visit">
+  <h2>Visit us</h2>
+  <p class="sub">Walk-ins welcome · free parking in the lot behind the building.</p>
+  <div class="info">
+    <div class="card">
+      <h3>🕘 Hours</h3>
+      <div class="hours-row"><span>Mon – Thu</span><b>11:00 AM – 9:00 PM</b></div>
+      <div class="hours-row"><span>Fri – Sat</span><b>11:00 AM – 10:00 PM</b></div>
+      <div class="hours-row"><span>Sunday</span><b>12:00 PM – 8:00 PM</b></div>
+    </div>
+    <div class="card">
+      <h3>📍 Find us</h3>
+      <p>312 W Oak St<br>Denton, TX 76201<br><br>Free lot behind the building, plus street parking on Oak St. Two blocks from the Denton square — look for the green awning!</p>
+    </div>
+    <div class="card">
+      <h3>📞 Contact</h3>
+      <p><b>(940) 555-0182</b><br>✉️ hola@casaverdemexicankitchen.example<br><br>🎉 Catering inquiries:<br>ext. 2, or ask <b>Verde</b> in the chat!</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div><b>Casa Verde Mexican Kitchen</b><br>312 W Oak St, Denton, TX 76201</div>
+    <div>📞 (940) 555-0182<br>✉️ hola@casaverdemexicankitchen.example</div>
+    <div>Mon–Thu 11–9 · Fri–Sat 11–10 · Sun 12–8<br>© 2026 Casa Verde Mexican Kitchen</div>
+  </div>
+</footer>
+<p class="demo-note">Demo portfolio piece — "Casa Verde Mexican Kitchen" is a fictional restaurant created to showcase an AI chat assistant for small businesses.</p>
+
+<!-- ================= CHAT WIDGET ================= -->
+<button id="chat-launcher" onclick="toggleChat()" aria-label="Open chat">💬<span id="chat-badge">1</span></button>
+
+<div id="chat-widget" role="dialog" aria-label="Casa Verde chat">
+  <div class="chat-header">
+    <div class="chat-avatar">🌮</div>
+    <div class="t"><b>Verde — AI Host</b><span><span class="dot"></span> Online · replies instantly</span></div>
+    <button class="chat-close" onclick="toggleChat()">✕</button>
+  </div>
+  <div id="chat-body"></div>
+  <div id="chips"></div>
+  <div class="chat-input">
+    <input id="chat-text" type="text" placeholder="Type your message…" autocomplete="off" onkeydown="if(event.key==='Enter')sendUser()">
+    <button onclick="sendUser()" aria-label="Send">➤</button>
+  </div>
+</div>
+
+<script>
+/* ============ Verde — rule-based demo AI engine ============ */
+const body = document.getElementById('chat-body');
+const chipsEl = document.getElementById('chips');
+const inputEl = document.getElementById('chat-text');
+const launcher = document.getElementById('chat-launcher');
+const badge = document.getElementById('chat-badge');
+const widget = document.getElementById('chat-widget');
+
+let greeted = false;
+let convo = { mode:'idle', step:0, data:{} }; // mode: idle | reserve | catering | lead
+
+function openChat(){ widget.classList.add('open'); badge.style.display='none'; if(!greeted){ greeted=true; greet(); } inputEl.focus(); }
+function toggleChat(){ widget.classList.contains('open') ? widget.classList.remove('open') : openChat(); }
+
+function esc(s){ const d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
+
+function addMsg(text, who){
+  const m=document.createElement('div');
+  m.className='msg '+who; m.innerHTML=text;
+  body.appendChild(m); body.scrollTop=body.scrollHeight;
+}
+function addUserMsg(text){
+  const m=document.createElement('div');
+  m.className='msg user'; m.textContent=text;
+  body.appendChild(m); body.scrollTop=body.scrollHeight;
+}
+function showTyping(cb){
+  const t=document.createElement('div');
+  t.className='msg bot typing'; t.id='typing-bubble';
+  t.innerHTML='<i></i><i></i><i></i>';
+  body.appendChild(t); body.scrollTop=body.scrollHeight;
+  setTimeout(()=>{ const b=document.getElementById('typing-bubble'); if(b) b.remove(); cb(); }, 650+Math.random()*500);
+}
+function botSay(html, chips){
+  showTyping(()=>{ addMsg(html,'bot'); renderChips(chips||[]); });
+}
+function renderChips(chips){
+  chipsEl.innerHTML='';
+  chips.forEach(c=>{
+    const b=document.createElement('button');
+    b.className='chip'; b.textContent=c.label;
+    b.onclick=()=>{ addUserMsg(c.label); clearChips(); handleInput(c.value||c.label, true); };
+    chipsEl.appendChild(b);
+  });
+}
+function clearChips(){ chipsEl.innerHTML=''; }
+
+const HOME_CHIPS=[
+  {label:'🍽️ View menu', value:'menu'},
+  {label:'📅 Book a table', value:'book table'},
+  {label:'🕘 Hours & location', value:'hours'},
+  {label:'🎉 Catering', value:'catering'}
+];
+
+function greet(){
+  botSay("¡Hola! 👋 I'm <b>Verde</b>, your host at Casa Verde Mexican Kitchen in Denton. I can show you our menu, book you a table, or answer questions about hours, parking, veggie options, and catering. What sounds good?", HOME_CHIPS);
+}
+
+/* ---------- menu data ---------- */
+const MENU={
+  tacos:[
+    {n:'Al Pastor', d:'Marinated pork, grilled pineapple, cilantro & onion', p:'$11.99', t:'🌶️ medium'},
+    {n:'Baja Fish', d:'Crispy cod, chipotle crema, cabbage slaw', p:'$12.99', t:'🌶️ mild'},
+    {n:'Carnitas', d:'Slow-roasted pork, pickled onion, salsa verde', p:'$11.49', t:'🌶️ mild'},
+    {n:'Birria', d:'Three tacos with rich consommé for dipping', p:'$13.99', t:'🌶️ medium · 🔥 favorite'},
+    {n:'Veggie', d:'Grilled peppers, mushrooms & onion, avocado crema', p:'$10.99', t:'🌱 veggie · 🌶️ mild'}
+  ],
+  enchiladas:[
+    {n:'Cheese Enchiladas', d:'Three cheese enchiladas, red chile sauce, rice & beans', p:'$12.49', t:'🌱 veggie'},
+    {n:'Chicken Enchiladas', d:'Pulled chicken, tomatillo salsa, crema', p:'$13.99', t:'🌶️ mild'},
+    {n:'Beef Enchiladas', d:'Seasoned ground beef, red chile sauce, onion', p:'$14.49', t:'🌶️ medium'},
+    {n:'Enchiladas Verdes', d:'Chicken, roasted tomatillo sauce, queso fresco', p:'$14.49', t:'🌶️ medium'}
+  ],
+  fajitas:[
+    {n:'Chicken Fajitas', d:'Sizzling chicken, peppers & onions, rice, beans, tortillas', p:'$17.99', t:''},
+    {n:'Steak Fajitas', d:'Sizzling skirt steak, peppers & onions, rice, beans, tortillas', p:'$19.99', t:'🔥 favorite'},
+    {n:'Mixed Grill Fajitas', d:'Chicken + steak + shrimp, the full sizzle', p:'$21.99', t:'great for sharing'},
+    {n:'Veggie Fajitas', d:'Grilled seasonal veggies & mushrooms, rice, beans, tortillas', p:'$15.99', t:'🌱 veggie · vegan on request'}
+  ],
+  sides:[
+    {n:'Tableside Guacamole', d:'Made fresh to order with warm totopos', p:'$7.99', t:'🌱 vegan'},
+    {n:'Churros', d:'Cinnamon sugar, cajeta dipping sauce', p:'$5.99', t:'🌱 veggie'},
+    {n:'Horchata', d:'House-made cinnamon rice drink', p:'$3.99', t:'🌱 vegan'}
+  ]
+};
+function menuHTML(items){
+  return items.map(i=>'• <b>'+esc(i.n)+'</b> — '+esc(i.p)+'<br><span style="opacity:.78;font-size:.86em">'+esc(i.d)+(i.t?' · '+esc(i.t):'')+'</span>').join('<br><br>');
+}
+const MENU_CHIPS=[
+  {label:'🌮 Tacos', value:'tacos'},
+  {label:'🫔 Enchiladas', value:'enchiladas'},
+  {label:'🔥 Fajitas', value:'fajitas'},
+  {label:'🍰 Sides & sips', value:'sides'}
+];
+
+/* ---------- intent detection ---------- */
+function intent(t){
+  const s=t.toLowerCase();
+  if(/(^|\s)(hi|hii+|hello|hey|yo|good\s?(morning|afternoon|evening)|hola)\b/.test(s)) return 'greeting';
+  if(/cater|taco bar|wedding|banquet|office party|large event|feed (a|the) (crowd|group|team)/.test(s)) return 'catering';
+  if(/hour|open|close|timing|when.*(open|close)|sunday|monday|weekend|tuesday/.test(s)) return 'hours';
+  if(/park|where|address|location|direction|find you|map/.test(s)) return 'location';
+  if(/vegetarian|vegan|veggie|meatless|plant.?based/.test(s)) return 'diet';
+  if(/spic|spicy|heat level|mild|hot sauce|salsa/.test(s)) return 'spice';
+  if(/taco/.test(s)) return 'menu_tacos';
+  if(/enchilada/.test(s)) return 'menu_enchiladas';
+  if(/fajita/.test(s)) return 'menu_fajitas';
+  if(/guac|churro|horchata|dessert|drink|sides?/.test(s)) return 'menu_sides';
+  if(/menu|food|eat|dish|what.*(serve|have|offer|good)/.test(s)) return 'menu';
+  if(/price|cost|how much|expensive|cheap|deal|special/.test(s)) return 'price';
+  if(/reserv|book.*table|table for|seat/.test(s)) return 'reserve';
+  if(/thank|thanks|thx|great|awesome|perfect|delicious|yummy|amazing/.test(s)) return 'thanks';
+  if(/bye|goodbye|see you|adios/.test(s)) return 'bye';
+  if(/human|person|real|staff|manager|call me|phone/.test(s)) return 'human';
+  return 'fallback';
+}
+
+/* ---------- reservation flow ---------- */
+function startReserve(){
+  convo={mode:'reserve', step:1, data:{}};
+  botSay("Wonderful — let's get your table ready! 📅<br>What's the <b>name</b> for the reservation?");
+}
+function reserveStep(raw){
+  const t=raw.trim();
+  if(/^cancel$/i.test(t)){ convo={mode:'idle',step:0,data:{}}; botSay("No problem — reservation cancelled. Anything else I can help with?", HOME_CHIPS); return; }
+  const d=convo.data;
+  if(convo.step===1){
+    if(t.length<2){ botSay("Could you share the name for the reservation?"); return; }
+    d.name=t; convo.step=2;
+    botSay("Thanks, "+esc(t.split(' ')[0])+"! What's the best <b>phone number</b> to confirm with? (10 digits)", [{label:'Cancel',value:'CANCEL'}]);
+  } else if(convo.step===2){
+    const digits=t.replace(/\D/g,'');
+    if(digits.length<10){ botSay("Hmm, that doesn't look complete. Could you enter your <b>10-digit</b> phone number?"); return; }
+    d.phone='('+digits.slice(0,3)+') '+digits.slice(3,6)+'-'+digits.slice(6,10);
+    convo.step=3;
+    botSay("Got it! 📞<br>What <b>date</b> would you like to come in? (e.g. Fri Oct 2)");
+  } else if(convo.step===3){
+    if(t.length<3){ botSay("Could you tell me the date? For example: <b>Fri Oct 2</b>."); return; }
+    d.date=t; convo.step=4;
+    botSay("And what <b>time</b>? We're open Mon–Thu 11am–9pm, Fri–Sat 11am–10pm, Sun 12pm–8pm.");
+  } else if(convo.step===4){
+    if(t.length<2){ botSay("What time works for you?"); return; }
+    d.time=t; convo.step=5;
+    botSay("Last one — how many <b>guests</b> in your party?");
+  } else if(convo.step===5){
+    const n=parseInt(t.replace(/\D/g,''),10);
+    if(!n||n<1||n>40){ botSay("Could you give me the party size as a number? (For parties over 12, you might love our catering instead! 🎉)"); return; }
+    d.party=n; convo.step=6;
+    const ref='CV-'+Math.floor(1000+Math.random()*9000);
+    d.ref=ref;
+    botSay("Here's your reservation summary 📋<br><br>👤 <b>Name:</b> "+esc(d.name)+"<br>📞 <b>Phone:</b> "+esc(d.phone)+"<br>🗓️ <b>Date:</b> "+esc(d.date)+"<br>⏰ <b>Time:</b> "+esc(d.time)+"<br>👥 <b>Party:</b> "+esc(d.party)+" guest"+(d.party>1?'s':'')+"<br><br>Shall I confirm this reservation?",
+      [{label:'✅ Confirm reservation',value:'CONFIRM'},{label:'Start over',value:'RESTART'},{label:'Cancel',value:'CANCEL'}]);
+  } else if(convo.step===6){
+    if(t==='CONFIRM'){
+      convo={mode:'idle',step:0,data:{}};
+      botSay("🎉 You're all set, "+esc(d.name.split(' ')[0])+"!<br><br>Table for <b>"+esc(d.party)+"</b> on <b>"+esc(d.date)+"</b> at <b>"+esc(d.time)+"</b>.<br>Confirmation: <b>"+d.ref+"</b> — we'll text "+esc(d.phone)+" if anything changes.<br><br>¡Nos vemos pronto! Anything else?", HOME_CHIPS);
+    } else if(t==='RESTART'){ startReserve(); }
+    else { convo={mode:'idle',step:0,data:{}}; botSay("No problem — reservation cancelled. Anything else I can help with?", HOME_CHIPS); }
+  }
+}
+
+/* ---------- catering flow ---------- */
+function startCatering(){
+  convo={mode:'catering', step:1, data:{}};
+  botSay("We'd love to cater your event! 🎉 Our taco bars and fajita spreads are a hit for parties of 20 to 200.<br><br>What's your <b>name</b>?");
+}
+function cateringStep(raw){
+  const t=raw.trim();
+  if(/^cancel$/i.test(t)){ convo={mode:'idle',step:0,data:{}}; botSay("No problem! If catering comes up later, just ask. Anything else?", HOME_CHIPS); return; }
+  const d=convo.data;
+  if(convo.step===1){
+    if(t.length<2){ botSay("Could you share your name so our catering team knows who to contact?"); return; }
+    d.name=t; convo.step=2;
+    botSay("Thanks, "+esc(t.split(' ')[0])+"! What's the best <b>phone number</b> to reach you? (10 digits)", [{label:'Cancel',value:'CANCEL'}]);
+  } else if(convo.step===2){
+    const digits=t.replace(/\D/g,'');
+    if(digits.length<10){ botSay("That number looks incomplete — could you enter your <b>10-digit</b> phone number?"); return; }
+    d.phone='('+digits.slice(0,3)+') '+digits.slice(3,6)+'-'+digits.slice(6,10);
+    convo.step=3;
+    botSay("What's the <b>event date</b>? (e.g. Sat Oct 17)");
+  } else if(convo.step===3){
+    if(t.length<3){ botSay("Could you tell me the event date? For example: <b>Sat Oct 17</b>."); return; }
+    d.date=t; convo.step=4;
+    botSay("And roughly how many <b>guests</b> are you expecting?");
+  } else if(convo.step===4){
+    const n=parseInt(t.replace(/\D/g,''),10);
+    if(!n||n<1){ botSay("Could you give me an approximate guest count as a number?"); return; }
+    d.guests=n; convo.step=5;
+    botSay("Here's your catering inquiry summary 📋<br><br>👤 <b>Name:</b> "+esc(d.name)+"<br>📞 <b>Phone:</b> "+esc(d.phone)+"<br>🗓️ <b>Event date:</b> "+esc(d.date)+"<br>👥 <b>Guests:</b> ~"+esc(d.guests)+"<br><br>Our catering team will call you within <b>1 business day</b> with a custom quote. Submit this inquiry?",
+      [{label:'✅ Submit inquiry',value:'CONFIRM'},{label:'Start over',value:'RESTART'},{label:'Cancel',value:'CANCEL'}]);
+  } else if(convo.step===5){
+    if(t==='CONFIRM'){
+      convo={mode:'idle',step:0,data:{}};
+      botSay("🎉 Inquiry submitted, "+esc(d.name.split(' ')[0])+"! Our catering team will call <b>"+esc(d.phone)+"</b> within 1 business day about your event on <b>"+esc(d.date)+"</b> for ~"+esc(d.guests)+" guests.<br><br>Anything else I can help with?", HOME_CHIPS);
+    } else if(t==='RESTART'){ startCatering(); }
+    else { convo={mode:'idle',step:0,data:{}}; botSay("No problem! Anything else I can help with?", HOME_CHIPS); }
+  }
+}
+
+/* ---------- lead capture (callback request) ---------- */
+function startLead(){
+  convo={mode:'lead', step:1, data:{}};
+  botSay("Of course! I'll have someone from our team call you back. 🤝<br>What's your <b>name</b>?", [{label:'Never mind',value:'CANCEL'}]);
+}
+function leadStep(raw){
+  const t=raw.trim();
+  if(/^cancel$/i.test(t)||t==='CANCEL'){ convo={mode:'idle',step:0,data:{}}; botSay("No worries! I'm still here if you need anything.", HOME_CHIPS); return; }
+  const d=convo.data;
+  if(convo.step===1){
+    if(t.length<2){ botSay("Could you share your name so our team knows who to ask for?"); return; }
+    d.name=t; convo.step=2;
+    botSay("Thanks, "+esc(t.split(' ')[0])+". And your <b>phone number</b>?");
+  } else if(convo.step===2){
+    const digits=t.replace(/\D/g,'');
+    if(digits.length<10){ botSay("That number looks incomplete — could you enter your <b>10-digit</b> phone number?"); return; }
+    d.phone='('+digits.slice(0,3)+') '+digits.slice(3,6)+'-'+digits.slice(6,10);
+    convo={mode:'idle',step:0,data:{}};
+    botSay("All set, "+esc(d.name.split(' ')[0])+"! ✅ We'll call <b>"+esc(d.phone)+"</b> shortly. Anything else I can help with meanwhile?", HOME_CHIPS);
+  }
+}
+
+/* ---------- main router ---------- */
+function handleInput(raw, fromChip){
+  const text=raw.trim();
+  if(!text) return;
+  if(convo.mode==='reserve'){ reserveStep(text); return; }
+  if(convo.mode==='catering'){ cateringStep(text); return; }
+  if(convo.mode==='lead'){ leadStep(text); return; }
+
+  switch(intent(text)){
+    case 'greeting':
+      botSay("¡Hola! 👋 Welcome to Casa Verde! Are you hungry for the menu, or can I book you a table?", HOME_CHIPS); break;
+    case 'hours':
+      botSay("🕘 <b>Our hours:</b><br>Mon–Thu: 11:00 AM – 9:00 PM<br>Fri–Sat: 11:00 AM – 10:00 PM<br>Sun: 12:00 PM – 8:00 PM<br><br>And don't miss <b>Taco Tuesday</b> — $2 tacos all day! 🌮<br><br>Want me to book you a table?",
+        [{label:'📅 Book a table',value:'book table'},{label:'📍 Location',value:'location'}]); break;
+    case 'location':
+      botSay("📍 You'll find us at:<br><b>312 W Oak St<br>Denton, TX 76201</b><br><br>🚗 <b>Parking:</b> free lot right behind the building, plus street parking on Oak St. Two blocks from the Denton square — look for the green awning!", HOME_CHIPS); break;
+    case 'menu':
+      botSay("Here's what we're cooking 🍽️ — which category are you craving?", MENU_CHIPS); break;
+    case 'menu_tacos':
+      botSay("🌮 <b>Tacos</b> — 3 per order on handmade corn tortillas:<br><br>"+menuHTML(MENU.tacos)+"<br><br>Tuesday special: any taco order <b>$2 off</b>!",
+        [{label:'🫔 Enchiladas',value:'enchiladas'},{label:'📅 Book a table',value:'book table'},{label:'🍽️ Full menu',value:'menu'}]); break;
+    case 'menu_enchiladas':
+      botSay("🫔 <b>Enchiladas</b> — served with rice & beans:<br><br>"+menuHTML(MENU.enchiladas),
+        [{label:'🔥 Fajitas',value:'fajitas'},{label:'📅 Book a table',value:'book table'},{label:'🍽️ Full menu',value:'menu'}]); break;
+    case 'menu_fajitas':
+      botSay("🔥 <b>Fajitas</b> — served sizzling with rice, beans & flour tortillas:<br><br>"+menuHTML(MENU.fajitas),
+        [{label:'🌮 Tacos',value:'tacos'},{label:'📅 Book a table',value:'book table'},{label:'🍽️ Full menu',value:'menu'}]); break;
+    case 'menu_sides':
+      botSay("🍰 <b>Sides & sips:</b><br><br>"+menuHTML(MENU.sides)+"<br><br>The tableside guac is worth the trip alone. 🥑",
+        [{label:'🍽️ Full menu',value:'menu'},{label:'📅 Book a table',value:'book table'}]); break;
+    case 'diet':
+      botSay("🌱 We've got you covered!<br><br><b>Vegetarian:</b> Veggie Tacos, Cheese Enchiladas, Veggie Fajitas, Churros<br><b>Vegan:</b> Tableside Guacamole, Horchata — and we can make most veggie dishes vegan on request (just ask!).<br><br>Our beans and rice are vegetarian-friendly. Anything else?",
+        [{label:'🌮 Tacos',value:'tacos'},{label:'📅 Book a table',value:'book table'}]); break;
+    case 'spice':
+      botSay("🌶️ <b>Spice guide:</b><br>• Pico de gallo — mild & fresh<br>• Salsa roja — medium kick<br>• Habanero — 🔥 for the brave<br><br>Every dish is marked mild/medium on our menu, and you can always ask for <b>sauce on the side</b>. We never go hotter than you want!",
+        [{label:'🍽️ View menu',value:'menu'}]); break;
+    case 'price':
+      botSay("💲 <b>Price ranges:</b><br>• Tacos — $10.99–$13.99 (3 per order)<br>• Enchiladas — $12.49–$14.49<br>• Fajitas — $15.99–$21.99<br>• Sides & sips — $3.99–$7.99<br><br>Best deal in town: <b>Taco Tuesday</b>, $2 tacos all day! 🌮",
+        [{label:'🍽️ View menu',value:'menu'},{label:'📅 Book a table',value:'book table'}]); break;
+    case 'reserve': startReserve(); break;
+    case 'catering': startCatering(); break;
+    case 'thanks':
+      botSay("¡De nada! 😊 So glad I could help. Come hungry — we'll take great care of you!", HOME_CHIPS); break;
+    case 'bye':
+      botSay("¡Adiós! 👋 Thanks for stopping by Casa Verde — come back hungry! 🌮✨", []); break;
+    case 'human': startLead(); break;
+    default:
+      botSay("Hmm, I'm not sure about that one. 🤔<br><br>I can help with our <b>menu</b>, <b>hours</b>, <b>parking</b>, <b>veggie options</b>, <b>table reservations</b>, or <b>catering</b> — or I can have our team <b>call you back</b>.",
+        [{label:'🍽️ View menu',value:'menu'},{label:'📅 Book a table',value:'book table'},{label:'Have them call me',value:'human'}]);
+  }
+}
+
+function sendUser(){
+  const v=inputEl.value.trim();
+  if(!v) return;
+  inputEl.value='';
+  addUserMsg(v); clearChips();
+  handleInput(v,false);
+}
+</script>
+</body>
+</html>
